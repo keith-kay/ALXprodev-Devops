@@ -1,0 +1,6 @@
+#!/bin/bash
+
+jq -r '
+  . as $p |
+  "\(.name|ascii_upcase[0])\(.name[1:]) is of type \(.types[0].type.name|ascii_upcase[0])\(.types[0].type.name[1:]), weighs \(.weight/10)kg, and is \(.height/10)m tall."
+' data.json | sed 's/\b\([A-Za-z]\)\([a-z]*\)\b/\u\1\2/g'
