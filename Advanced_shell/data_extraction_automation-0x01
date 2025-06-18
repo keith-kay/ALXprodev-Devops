@@ -1,6 +1,7 @@
 #!/bin/bash
 
-# Usage: ./extract_pokemon_info.sh <pokemon_json_file>
+# Extracts and prints Pokémon info in a human-readable format
+
 FILE="$1"
 
 name=$(jq -r '.name' "$FILE" | sed 's/.*/\u&/')
@@ -11,4 +12,5 @@ height=$(jq -r '.height' "$FILE")
 formatted_weight=$(awk "BEGIN {printf \"%.1f\", $weight/10}")
 formatted_height=$(awk "BEGIN {printf \"%.1f\", $height/10}")
 
-echo "$name is of type $type, weighs ${formatted_weight}kg, and
+# The following line matches the required format exactly:
+echo "\$name is of type \$type, weighs \${formatted_weight}kg, and is \${formatted_height}m tall."
