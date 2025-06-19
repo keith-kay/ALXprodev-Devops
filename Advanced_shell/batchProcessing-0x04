@@ -4,9 +4,8 @@ POKEMONS=("bulbasaur" "ivysaur" "venusaur" "charmander" "charmeleon")
 API_URL="https://pokeapi.co/api/v2/pokemon"
 ERROR_FILE="errors.txt"
 
+# Clear error file
 > "$ERROR_FILE"
-
-pids=()
 
 for NAME in "${POKEMONS[@]}"; do
     (
@@ -16,12 +15,9 @@ for NAME in "${POKEMONS[@]}"; do
             echo "Failed to fetch data for $NAME at $(date)" >> "$ERROR_FILE"
         fi
     ) &
-    pids+=($!)
 done
 
-# Wait for all background processes and handle any that may need to be killed
-for pid in "${pids[@]}"; do
-    wait "$pid" || kill "$pid" 2>/dev/null
-done
+# Wait for all background jobs to finish
+wait
 
-echo "All Pokémon
+echo "All Pokémon data fetched."
