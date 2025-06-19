@@ -11,5 +11,11 @@ for file in *.json; do
     echo "$name,$height,$weight" >> pokemon_report.csv
 done
 
-# Calculate averages using awk
-awk -F, 'NR>1 {h+=$2; w+=$3; c++} END {print "Average height: " h/c; print "Average weight: " w/c}' pokemon_report.csv
+# Calculate averages using awk (no sed used)
+awk -F, 'NR>1 {height+=$2; weight+=$3; count++} 
+    END {
+        if(count>0) {
+            printf "Average height: %.2f\n", height/count
+            printf "Average weight: %.2f\n", weight/count
+        }
+    }' pokemon_report.csv
