@@ -12,5 +12,5 @@ height=$(jq -r '.height' "$FILE")
 formatted_weight=$(awk "BEGIN {printf \"%.1f\", $weight/10}")
 formatted_height=$(awk "BEGIN {printf \"%.1f\", $height/10}")
 
-# The following line matches the required format exactly:
-echo "\$name is of type \$type, weighs \${formatted_weight}kg, and is \${formatted_height}m tall."
+# Correct output
+echo "$name is of type $type, weighs ${formatted_weight}kg, and is ${formatted_height}m tall."
